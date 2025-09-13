@@ -25,7 +25,6 @@ Select option 1, enter the register count and number of reads.
 
 Write value:
 Select option 2 or 3, enter the register address and how many times you want to write.
-
 ![Demo](assets/demo.gif)
 
 ⚠️ Disclaimer
