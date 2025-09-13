@@ -1,3 +1,5 @@
+![Modbuzz Banner](assets/modbuzz.png)
+
 # ModBuzz
 Modbuzz is a lightweight Python tool for interacting with Modbus TCP devices. It provides a simple terminal-based interface to read and write Modbus registers, making it useful for quick tests, debugging, or automation in industrial control environments.
 
