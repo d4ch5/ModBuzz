@@ -23,6 +23,7 @@ def show_menu():
     print('1. Read Register from Target')
     print('2. Write 0 to register')
     print('3. Write 1 to register')
+    print('4. Write 0 to coils')
     
 def read_register(ip):
             count_reg = int(input("Enter register-count: "))
@@ -34,7 +35,7 @@ def read_register(ip):
                 if r:
                     print(f"Registers: {r}")
                 else:
-                    print("Failed to read register.")
+                    print("[-] Failed to read register.")
                 time.sleep(1)
 
 def write_register_zero(ip):
@@ -45,9 +46,9 @@ def write_register_zero(ip):
             for i in range(1, count_write):
                 w = client.write_single_register(count_num, 0)
                 if w:
-                    print(f'Writing 0 to register {count_num}...')
+                    print(f'[+] Writing 0 to register {count_num}...')
                 else:
-                    print(f'Failed to write 0 to register {count_num}...')            
+                    print(f'[-] Failed to write 0 to register {count_num}...')            
                 time.sleep(1)
 
 def write_register_one(ip):
@@ -58,10 +59,24 @@ def write_register_one(ip):
             for i in range(1, count_write):
                 w = client.write_single_register(count_num, 1)
                 if w:
-                    print(f'Writing 1 to register {count_num}...')
+                    print(f'[+] Writing 1 to register {count_num}...')
                 else:
-                    print(f'Failed to write 0 to register {count_num}...')            
+                    print(f'[-] Failed to write 1 to register {count_num}...')            
                 time.sleep(1)
+
+def write_coils(ip):
+            coils = []
+            client = ModbusClient(host=ip, port=502, auto_open=True)
+            count_write = int(input("Enter amount of coils to write 0: "))
+            for i in range(count_write):
+                coils.append(0)
+            while True:
+                w = client.write_multiple_coils(0, coils)
+                if w:
+                    print(f'[+] Writing 0 to coils...')
+                else:
+                    print(f'[-] Failed to write 1 to coils...')
+     
 
 if __name__ == "__main__":
     try:
@@ -76,10 +91,10 @@ if __name__ == "__main__":
 
         if choice == "1":
             read_register(ip)
-        
         if choice == "2":
              write_register_zero(ip)
-        
         if choice == "3":
              write_register_one(ip)
+        if choice == "4":
+             write_coils(ip)
 
